@@ -37,3 +37,19 @@ export const userCreate = (username) => {
        });
  
 }
+
+export const getUser = async (username,navigate) => {
+    const ref = doc(db, "users", username) // username isimli documenti aldık
+    try {
+        const user = await getDoc(ref); // kullanıcı verisini aldık
+    
+        if (user.exists()) { // kullanıcı verisi varsa geri gönderdik
+            return user.data();
+        } else {
+            navigate('error');
+            console.log('Belge bulunamadı.');
+        }
+    } catch (error) {
+        console.error('Hata:', error);
+    }
+}
