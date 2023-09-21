@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import img from '~/assets/logo.png'
 import { Link } from 'react-router-dom';
+import { userCreate } from '~/utils/userOperation';
 
 
 export default function Register() {
@@ -48,8 +49,9 @@ export default function Register() {
                 Password: yup.string().min(7,"Şifre min 7 Karakterli olmalıdır").required("Şifre zorunludur"),
               })
             }
-            onSubmit={(values) => {
-              console.log(values)
+            onSubmit={(values,{setErrors}) => {
+              // console.log(values)
+              userCreate(values,setErrors)
             }}
           >
             {({ values, errors, handleChange, handleBlur, touched ,handleSubmit}) => (

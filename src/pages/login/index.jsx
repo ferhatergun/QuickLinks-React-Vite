@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import img from '~/assets/logo.png'
 import { Link } from 'react-router-dom';
+import { userLogin } from '~/utils/userOperation';
 
 
 export default function Login() {
@@ -48,6 +49,7 @@ export default function Login() {
             }
             onSubmit={(values) => {
               console.log(values)
+              userLogin(values)
             }}
           >
             {({ values, errors, handleChange, handleBlur, touched ,handleSubmit}) => (

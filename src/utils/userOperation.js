@@ -1,41 +1,56 @@
-import { doc, getDoc , setDoc} from 'firebase/firestore';
-import { db } from '~/firebase/firebase';
+import { doc, getDoc , setDoc ,updateDoc} from 'firebase/firestore';
+import { db ,auth} from '~/firebase/firebase';
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword } from 'firebase/auth';
+import { updateProfile } from 'firebase/auth';
+import { CreateDoc } from './docOparation';
+import { toast } from 'react-toastify';
 
 export const userCheck = async (username) => {
     const usersRef = doc(db, 'users',username); // 'users' içinden username yi aldık varsa
     const querySnapshot = await getDoc(usersRef);
     if (querySnapshot.exists()) {
-      console.log('Kullanıcı adı zaten kullanılıyor.');
+      return false
     } else {
-      console.log('Kullanıcı adı kullanılabilir.');
+      return true
     }
 }
 
 
-export const userCreate = (username) => {
-     const userDocRef = doc(db, 'users', username);
-     // username isimli documenti yakalıyoruz
- 
-     setDoc(userDocRef, { // yakaladığımız referansın içini dolduruyoruz
-       list:
-       [
-         {
-           label: 'name',
-           link:"https://www.google.com.tr/"
-         },
-         {
-           label: 'surname',
-           link:"https://www.google.com.tr/"
-         }
-       ]}
-     )
-       .then(() => {
-         console.log('başarıyla oluşturuldu: ');
-       })
-       .catch((error) => {
-         console.error('hata oluştu');
-       });
- 
+export const userCreate = async (values,setErrors) => {
+  try{
+  const check = await userCheck(values.UserName)
+  if(check){
+    const user = await createUserWithEmailAndPassword(auth,values.Email,values.Password)
+    if(user){
+      updateProfile(user.user,{displayName:values.UserName})
+      .then(()=>CreateDoc(values.UserName))
+      .catch((e)=>console.log("kullanıcı adı güncellenirken hata oluştu",e))
+      .finally(()=>toast.success("Kayıt Başarılı"))
+    }
+    else{
+      console.log("kullanıcı oluşturulurken hata oluştu")
+    }     
+  }
+  else{
+    setErrors({ UserName: 'Bu Kullanıcı Adı Kullanılıyor' })
+  }
+  }
+  catch(e){
+    console.log("kayıt olurken hata oluştu",e)
+  }
+}
+
+export const userLogin = async (values) => {
+  try{
+    const user = await signInWithEmailAndPassword(auth,values.Email,values.Password)
+    if(user){
+      toast.success("Giriş Başarılı")
+    }
+  }
+  catch(e){
+    toast.error("Giriş Başarısız")
+    console.log("giriş yaparken hata oluştu",e)
+  }
 }
 
 export const getUser = async (username,navigate) => {

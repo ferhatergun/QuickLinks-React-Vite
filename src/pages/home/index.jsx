@@ -5,7 +5,8 @@ import { db  } from '~/firebase/firebase';
 import { styles } from '~/styles';
 import Navbar from '~/components/navbar';
 import HomeContent from '~/components/homeContent';
-
+import {useAuthState} from 'react-firebase-hooks/auth';
+import { auth } from '~/firebase/firebase';
 
 
 export default function Home() {
@@ -27,6 +28,9 @@ export default function Home() {
       console.error('Hata:', error);
     }
   }
+
+  const [user,isLoading] =useAuthState(auth)
+
   
   return (
     <div style={{backgroundColor:color}} className='lg:w-[80vw] m-auto'>
@@ -36,6 +40,8 @@ export default function Home() {
       <div className='text-[50px]' onClick={()=>userCheck("fero")} >kullanıcı kontrol et</div>
       <div onClick={getUser}>Kullanıcıyı getir</div>
       <div className={`${styles.background_2} w-full h-32`}></div>
+      <button onClick={()=>auth.signOut()}>çıkış yap</button>
+      <button onClick={()=>console.log(user)}>getir</button>
 
 
 
