@@ -6,6 +6,9 @@ import Login from "~/pages/login";
 import Register from "~/pages/register";
 import LoginLayout from "~/layout/LoginLayout";
 import ForgotPass from "~/pages/forgotPass";
+import AdminLayout from "~/layout/AdminLayout";
+import Admin from "~/pages/admin";
+import Error500 from "~/components/error";
 
 
 export const routes = createBrowserRouter([
@@ -41,7 +44,17 @@ export const routes = createBrowserRouter([
         ]
     },
     {
+        path: "/admin",
+        element:<AdminLayout />,
+        children:[
+            {
+                index:true,
+                element:<Admin />
+            }
+        ]
+    },
+    {
         path: "*",
-        element:<div>404</div>
+        element:<Error500 />
     }
 ])

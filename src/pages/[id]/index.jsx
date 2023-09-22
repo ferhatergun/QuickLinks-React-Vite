@@ -1,9 +1,9 @@
 import React, { useEffect ,useState} from 'react'
 import { useParams } from 'react-router-dom';
-import { getUser } from '~/utils/userOperation';
 import { useNavigate } from 'react-router-dom';
 import { styles } from '~/styles';
 import Loader from '~/components/loader';
+import { docGet } from '~/utils/docOparation';
 
 
 export default function Detail() {
@@ -16,7 +16,7 @@ export default function Detail() {
 
     useEffect(()=>{
       const getData = async () => {
-        const data = await getUser(params.id,navigate)
+        const data = await docGet(params.id,navigate)
         if(data){
             setColor(data.bgColor)
             console.log(color)

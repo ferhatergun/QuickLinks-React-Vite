@@ -1,4 +1,4 @@
-import { doc , setDoc } from "firebase/firestore";
+import { doc , setDoc ,getDoc} from "firebase/firestore";
 import { db } from "~/firebase/firebase";
 
 
@@ -25,4 +25,20 @@ export const CreateDoc = async (username) => {
        .catch((error) => {
          console.error('hata oluştu');
        });
+}
+
+export const docGet = async (username,navigate) => {
+  const ref = doc(db, "users", username) // username isimli documenti aldık
+  try {
+      const user = await getDoc(ref) // kullanıcı verisini aldık
+  
+      if (user.exists()) { // kullanıcı verisi varsa geri gönderdik
+          return user.data()
+      } else {
+          navigate('error')
+          console.log('Belge bulunamadı.')
+      }
+  } catch (error) {
+      console.error('Hata:', error)
+  }
 }

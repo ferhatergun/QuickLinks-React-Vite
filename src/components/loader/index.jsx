@@ -4,10 +4,11 @@ import { HashLoader } from 'react-spinners';
 
 export default function Loader() {
   return (
-    <HashLoader
-    color="#BB274A"
-    cssOverride={{display:'flex',justifyContent:'center',alignItems:'center',height:'100vh',width:'100%'}}
-    size={65}
-  />
+    <div className='flex items-center justify-center w-full h-[100vh]'>
+      <HashLoader
+      color="#BB274A"
+      size={65}
+      />
+    </div>
   )
 }
