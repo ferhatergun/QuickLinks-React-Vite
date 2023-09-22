@@ -1,6 +1,6 @@
-import { doc, getDoc , setDoc ,updateDoc} from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db ,auth} from '~/firebase/firebase';
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword , sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import { updateProfile } from 'firebase/auth';
 import { CreateDoc } from './docOparation';
 import { toast } from 'react-toastify';
@@ -67,4 +67,22 @@ export const getUser = async (username,navigate) => {
     } catch (error) {
         console.error('Hata:', error);
     }
+}
+
+export const passwordReset = async (values, setErrors) => {
+  try {
+    await sendPasswordResetEmail(auth, values.Email);
+    toast.success("Şifre Sıfırlama Maili Gönderildi");
+  } catch (error) {
+    setErrors({ Email: 'Kayıtlı Kullanıcı Bulunamadı' });
+  }
+}
+
+export const userLogout = async () => {
+  try {
+    await auth.signOut();
+    toast.success("Çıkış Başarılı");
+  } catch (error) {
+    toast.error("Çıkış Başarısız");
+  }
 }

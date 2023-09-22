@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { routes } from './routes'
@@ -12,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={routes} />
     <ToastContainer
           position="top-right"
-          autoClose={3000}
+          autoClose={2000}
           limit={2}
           hideProgressBar={false}
           newestOnTop={false}

@@ -4,6 +4,9 @@ import About from "~/pages/about";
 import Detail from "~/pages/[id]";
 import Login from "~/pages/login";
 import Register from "~/pages/register";
+import LoginLayout from "~/layout/LoginLayout";
+import ForgotPass from "~/pages/forgotPass";
+
 
 export const routes = createBrowserRouter([
     {
@@ -12,19 +15,30 @@ export const routes = createBrowserRouter([
     },
     {
         path: "/about",
-        element:<About/>
+        element:<About/>,
+        
     },
     {
-        path: "/:id",
+        path: "/page/:id",
         element:<Detail/>
     },
     {
-        path: "/login",
-        element:<Login/>
-    },
-    {
-        path: "/register",
-        element:<Register/>
+        path:"/",
+        element:<LoginLayout/>,
+        children:[
+            {
+                path:"login",
+                element:<Login/>
+            },
+            {
+                path: "register",
+                element:<Register/>
+            },
+            {
+                path:"forgotpass",
+                element:<ForgotPass/>
+            }
+        ]
     },
     {
         path: "*",

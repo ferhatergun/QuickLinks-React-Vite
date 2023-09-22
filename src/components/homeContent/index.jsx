@@ -1,12 +1,12 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { TypeAnimation } from 'react-type-animation';
-import img from '~/assets/fotos-1.png'
 import { motion } from 'framer-motion';
-
+import { Link } from 'react-router-dom';
 
 export default function Content() {
+    const [name, setName] = useState('')
   return (
-    <div className='min-h-[50vh] bg-gray-200 mt-20 rounded-[20px] flex flex-wrap-reverse justify-center'>
+    <div className='min-h-[50vh] bg-gray-200 mt-20 rounded-[20px] flex flex-wrap-reverse justify-center overflow-hidden'>
         <div className="md:w-[50%] w-full md:p-10 p-5">
             <TypeAnimation
             sequence={[
@@ -33,18 +33,22 @@ export default function Content() {
                 <input type="text" 
                 placeholder='username' 
                 className='pl-[1px] outline-none rounded-2xl bg-gray-100 w-full text-gray-500' 
+                value={name}
+                onChange={(e)=>setName(e.target.value)}
                 />
-                <div className='h-[70%] w-40 mr-2 bg-[#bb274a] rounded-2xl 
-                flex justify-center items-center text-white shadow-gray-300 shadow-sm drop-shadow-xl'>Lets Start</div>
+                <Link className='h-[70%] w-40 mr-2 bg-[#bb274a] rounded-2xl 
+                flex justify-center items-center text-white shadow-gray-300 shadow-sm drop-shadow-xl'
+                to="/register" state={{username:name}}>
+                Lets Start</Link>
             </div>
         </div>
         <div className="md:w-[50%] max-h-[50vh]">
             <motion.img
-            src={img}
+            src="fotos-1.png"
             alt=""
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{duration:0.5,ease:'linear'}}
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{duration:0.5,ease:'linear',delay:0.6}}
             className='h-full m-auto mix-blend-multiply'
             />
         </div>

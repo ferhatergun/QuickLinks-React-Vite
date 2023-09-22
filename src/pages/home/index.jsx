@@ -1,5 +1,5 @@
 import { doc ,getDoc} from 'firebase/firestore';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { userCheck, userCreate } from '~/utils/userOperation';
 import { db  } from '~/firebase/firebase';
 import { styles } from '~/styles';
@@ -7,6 +7,7 @@ import Navbar from '~/components/navbar';
 import HomeContent from '~/components/homeContent';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import { auth } from '~/firebase/firebase';
+import Loader from '~/components/loader';
 
 
 export default function Home() {
@@ -30,20 +31,27 @@ export default function Home() {
   }
 
   const [user,isLoading] =useAuthState(auth)
+  const [loading,setLoading] = useState(false)
 
-  
+  useEffect(()=>{
+    setLoading(true)
+  },[])
+
   return (
     <div style={{backgroundColor:color}} className='lg:w-[80vw] m-auto'>
-      <Navbar />
-      <HomeContent />
-      <div className='text-[50px]' onClick={()=>userCreate("deneme-1")} >kullanıcı oluştur</div>
-      <div className='text-[50px]' onClick={()=>userCheck("fero")} >kullanıcı kontrol et</div>
-      <div onClick={getUser}>Kullanıcıyı getir</div>
-      <div className={`${styles.background_2} w-full h-32`}></div>
-      <button onClick={()=>auth.signOut()}>çıkış yap</button>
-      <button onClick={()=>console.log(user)}>getir</button>
-
-
+      { (!isLoading && loading) ?
+      <>
+        <Navbar user={user} />
+        <HomeContent />
+        <div className='text-[50px]' onClick={()=>userCreate("deneme-1")} >kullanıcı oluştur</div>
+        <div className='text-[50px]' onClick={()=>userCheck("fero")} >kullanıcı kontrol et</div>
+        <div onClick={getUser}>Kullanıcıyı getir</div>
+        <div className={`${styles.background_2} w-full h-32`}></div>
+        <button onClick={()=>auth.signOut()}>çıkış yap</button>
+        <button onClick={()=>console.log(user)}>getir</button>
+        </>:
+        <Loader />
+      }
 
     </div>
   )
