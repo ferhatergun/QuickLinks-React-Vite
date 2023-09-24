@@ -3,6 +3,7 @@ import { auth } from '~/firebase/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Loader from '~/components/loader'
 import { Navigate, Outlet } from 'react-router-dom'
+import AdminNavbar from '~/components/adminNavbar'
 
 export default function AdminLayout() {
     const [admin,isLoading] = useAuthState(auth)
@@ -10,7 +11,13 @@ export default function AdminLayout() {
         return <Loader />
     }
     if(admin){
-      return <Outlet context={admin} />  
+      return(
+        <div>
+            <AdminNavbar />
+            <Outlet context={admin} />
+        </div>
+
+      )   
     }
     else{
         return <Navigate to="/" />

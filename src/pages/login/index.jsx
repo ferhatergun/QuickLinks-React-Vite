@@ -8,11 +8,6 @@ import Loader from '~/components/loader';
 
 
 export default function Login() {
-  const [loading, setLoading] = useState(false)
-
-  useEffect(()=>{
-    setLoading(true)
-  },[])
 
    const inputstyles = {
         "& .MuiInputLabel-root.Mui-focused ": {
@@ -38,7 +33,6 @@ export default function Login() {
     }
   return (
     <div className='flex justify-center items-center h-[100vh] pb-10 '>
-    { loading ?
     <div className='bg-gray-100 max-w-[600px] md:w-[60%] sm:w-[70%] w-full m-auto
     sm:px-10 py-5 flex flex-col items-center rounded-[20px] shadow-sm drop-shadow-lg'>
         <Link to="/"><img src="logo.png" alt="logo" className='w-14 mb-4' /></Link>
@@ -95,8 +89,6 @@ export default function Login() {
             )}
           </Formik>
     </div>
-    : <Loader/>
-  }
     </div>
   )
 }
