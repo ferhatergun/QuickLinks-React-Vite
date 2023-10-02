@@ -1,0 +1,11 @@
+
+/* ant design switch */
+:where(.css-dev-only-do-not-override-1vr7spz).ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+    background: #686868;
+}
+:where(.css-dev-only-do-not-override-1vr7spz).ant-switch.ant-switch-checked {
+    background: rgb(0, 171, 0);
+}
+:where(.css-dev-only-do-not-override-1vr7spz).ant-switch:hover:not(.ant-switch-disabled) {
+    background: #686868;
+}

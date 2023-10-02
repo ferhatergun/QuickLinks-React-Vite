@@ -1,4 +1,4 @@
-import { doc , setDoc ,getDoc} from "firebase/firestore";
+import { doc , setDoc ,getDoc,updateDoc} from "firebase/firestore";
 import { db } from "~/firebase/firebase";
 
 
@@ -10,11 +10,11 @@ export const CreateDoc = async (username) => {
        list:
        [
          {
-           label: 'name',
+           label: 'Başlık1',
            link:"https://www.google.com.tr/"
          },
          {
-           label: 'surname',
+           label: 'Başlık2',
            link:"https://www.google.com.tr/"
          }
        ]}
@@ -41,4 +41,14 @@ export const docGet = async (username,navigate) => {
   } catch (error) {
       console.error('Hata:', error)
   }
+}
+export const docUpdate = async (username,data) => {
+  const ref = doc(db, "users", username) // username isimli documenti aldık
+  try {
+    await updateDoc(ref, data);
+    console.log('Belge başarıyla güncellendi');
+  } catch (error) {
+    console.error('Hata:', error);
+  }
+
 }
