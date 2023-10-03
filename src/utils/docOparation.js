@@ -1,4 +1,5 @@
 import { doc , setDoc ,getDoc,updateDoc} from "firebase/firestore";
+import { list } from "postcss";
 import { db } from "~/firebase/firebase";
 
 
@@ -51,6 +52,21 @@ export const docUpdate = async (username,data) => {
     await updateDoc(ref, data);
     console.log('Belge başarıyla güncellendi');
   } catch (error) {
+    console.error('Hata:', error);
+  }
+
+}
+export const docAdd = async (username,setData) => {
+  const userDoc = await docGet(username)
+  console.log(userDoc)
+  try{
+    const ref = doc(db, "users", username)
+    await updateDoc(ref, {
+      list: [...userDoc.list, {label:"Başlık",link:"https://www.google.com.tr/",visible:false}]
+    });
+    await setData((prev)=>({...prev, list: [...prev.list, { label: "Başlık", link: "https://www.google.com.tr/", visible: false }] }));
+    console.log('Belge başarıyla güncellendi');
+  }catch(error){
     console.error('Hata:', error);
   }
 

@@ -2,7 +2,7 @@ import React, { useEffect ,useState} from 'react'
 import { auth } from '~/firebase/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useOutletContext ,useNavigate} from 'react-router-dom'
-import { docGet } from '~/utils/docOparation'
+import { docAdd, docGet } from '~/utils/docOparation'
 import Loader from '~/components/loader'
 import { Link } from 'react-router-dom'
 import { Avatar } from '@mui/material'
@@ -16,7 +16,7 @@ export default function Admin() {
     const navigate = useNavigate()
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(false)
-    console.log(data)
+    const [counter,setCounter] = useState(0)
 
     const getData = async () => {
         const data = await docGet(admin.displayName,navigate)
@@ -27,21 +27,31 @@ export default function Admin() {
         getData()
         setLoading(true)
     },[])
+
+    const addLink = () => {
+      docAdd("fero1",setData)
+    }
     
 
     return (
       <div className='w-full h-full flex relative'>
         <div className='lg:w-[calc(100%-400px)] md:w-[calc(100%-350px)] w-full flex justify-center pt-5'>
-          <div className='md:w-[80%] w-[90%] h-96  flex flex-col items-center'>
+          <div className='md:w-[80%] w-[90%] h-96  flex flex-col items-center' key={counter}>
             <div className='max-w-[250px] w-[80%] flex justify-center items-center 
             gap-1 p-2 rounded-xl text-white bg-color1 mb-5'
-            onClick={()=>console.log("güncel data",data)}>
+            onClick={()=> addLink()}>
               <AddIcon/> Link Ekle
             </div>
             {
               loading && 
               data?.list?.map((item,index)=>(
-                <AdminEditLink key={index} data={item} dataAll={data} index={index} setData={setData} />
+                <AdminEditLink 
+                key={index} 
+                data={item} 
+                dataAll={data} 
+                index={index} 
+                setData={setData} 
+                setCounter={setCounter}/>
               ))
             }
           </div>

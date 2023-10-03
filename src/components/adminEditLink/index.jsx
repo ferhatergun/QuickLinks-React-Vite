@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import EditIcon from '@mui/icons-material/Edit'
 import { Switch } from 'antd'
@@ -10,8 +10,7 @@ import '~/styles/globals.css'
 import { RiSendPlaneFill } from "react-icons/ri";
 import { docUpdate } from '~/utils/docOparation';
 
-export default function AdminEditLink({data,dataAll,index,setData}) {
-  const [updateData, setUpdateData] = useState([]);
+export default function AdminEditLink({data,dataAll,index,setData,setCounter}) {
   const [edit,setEdit]=useState(false)
   const handleEdit = () =>{
     setEdit(!edit)
@@ -21,23 +20,23 @@ export default function AdminEditLink({data,dataAll,index,setData}) {
     update(dataAll)
   }
   const deleteLink = async () => {
-    if (dataAll.list.length === index-1) {
+    if (dataAll.list.length === index-1) { // son elemanı siliyorsa
       const prevData = dataAll.list.slice(0, index)
       const newData = { ...dataAll, list: prevData }
       setData(newData)
       update(newData)
-    } else if (index === 0) {
+    } else if (index === 0) { // ilk elemanı siliyorsa
       const prevData = dataAll.list.slice(1)
       const newData = { ...dataAll, list: prevData }
       setData(newData)
       update(newData)
-    } else {
-      const prevData = dataAll.list.slice(0, index).concat(dataAll.list.slice(index + 1))
+    } else { // arada bir elemanı siliyorsa
+      const prevData = dataAll.list.slice(0, index).concat(dataAll.list.slice(index + 1)) 
       const newData = { ...dataAll, list: prevData }
       setData(newData)
       update(newData)
     }
-    
+    setCounter(prev=>prev+1)
     console.log("Link Silindi")
   }
   
@@ -77,7 +76,7 @@ export default function AdminEditLink({data,dataAll,index,setData}) {
             <div className='text-color1 rounded-lg p-1 cursor-pointer flex justify-center' onClick={handleEdit}>
               {
                 edit ?
-                <RiSendPlaneFill fontSize={24} onClick={()=>update()}/> :
+                <RiSendPlaneFill fontSize={24} onClick={()=>update(dataAll)}/> :
                 <EditIcon />
               }
             </div>                
