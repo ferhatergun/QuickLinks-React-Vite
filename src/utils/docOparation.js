@@ -11,11 +11,13 @@ export const CreateDoc = async (username) => {
        [
          {
            label: 'Başlık1',
-           link:"https://www.google.com.tr/"
+           link:"https://www.google.com.tr/",
+           visible:false
          },
          {
            label: 'Başlık2',
-           link:"https://www.google.com.tr/"
+           link:"https://www.google.com.tr/",
+           visible:false
          }
        ]}
      )
@@ -44,6 +46,7 @@ export const docGet = async (username,navigate) => {
 }
 export const docUpdate = async (username,data) => {
   const ref = doc(db, "users", username) // username isimli documenti aldık
+  console.log("gelendata",data)
   try {
     await updateDoc(ref, data);
     console.log('Belge başarıyla güncellendi');

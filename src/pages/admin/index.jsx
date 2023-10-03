@@ -41,7 +41,7 @@ export default function Admin() {
             {
               loading && 
               data?.list?.map((item,index)=>(
-                <AdminEditLink key={index} data={item} dataAll={data} />
+                <AdminEditLink key={index} data={item} dataAll={data} index={index} setData={setData} />
               ))
             }
           </div>

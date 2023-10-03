@@ -10,20 +10,39 @@ import '~/styles/globals.css'
 import { RiSendPlaneFill } from "react-icons/ri";
 import { docUpdate } from '~/utils/docOparation';
 
-export default function AdminEditLink({data,dataAll}) {
-  console.log("data",data)
+export default function AdminEditLink({data,dataAll,index,setData}) {
+  const [updateData, setUpdateData] = useState([]);
   const [edit,setEdit]=useState(false)
   const handleEdit = () =>{
     setEdit(!edit)
   }
   const handleActive = (e) => {
-    console.log(e ? "Aktif" : "Pasif")
+    data.visible=e
+    update(dataAll)
   }
-  const deleteLink = () => {
+  const deleteLink = async () => {
+    if (dataAll.list.length === index-1) {
+      const prevData = dataAll.list.slice(0, index)
+      const newData = { ...dataAll, list: prevData }
+      setData(newData)
+      update(newData)
+    } else if (index === 0) {
+      const prevData = dataAll.list.slice(1)
+      const newData = { ...dataAll, list: prevData }
+      setData(newData)
+      update(newData)
+    } else {
+      const prevData = dataAll.list.slice(0, index).concat(dataAll.list.slice(index + 1))
+      const newData = { ...dataAll, list: prevData }
+      setData(newData)
+      update(newData)
+    }
+    
     console.log("Link Silindi")
   }
-  const update = () => {
-    docUpdate("fero1",dataAll)
+  
+  const update = (updateData) => {
+    docUpdate("fero1",updateData)
   }
   return (
     <div>
@@ -49,7 +68,7 @@ export default function AdminEditLink({data,dataAll}) {
           />
           <Tooltip title='Linki Sil'>
             <div className='absolute bottom-2 left-2 text-color1 rounded-lg p-1 cursor-pointer hover:bg-gray-200'
-            onClick={()=>console.log("silindi")}>
+            onClick={()=>deleteLink()}>
               <DeleteIcon/>
             </div>
           </Tooltip>
@@ -58,7 +77,7 @@ export default function AdminEditLink({data,dataAll}) {
             <div className='text-color1 rounded-lg p-1 cursor-pointer flex justify-center' onClick={handleEdit}>
               {
                 edit ?
-                <RiSendPlaneFill fontSize={24} onClick={update}/> :
+                <RiSendPlaneFill fontSize={24} onClick={()=>update()}/> :
                 <EditIcon />
               }
             </div>                
@@ -66,8 +85,8 @@ export default function AdminEditLink({data,dataAll}) {
             className='switch bg-color1 flex items-center'
             checkedChildren={<VisibilityIcon  sx={{fontSize:20,mt:-0.5,pr:0.1}}/>}
             unCheckedChildren={<VisibilityOffIcon sx={{fontSize:19,mt:-0.5}}/>} 
-            defaultChecked
             onChange={(e)=>handleActive(e)}
+            defaultChecked={data?.visible}
             />
         </div>
       </div>
