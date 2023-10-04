@@ -38,7 +38,7 @@ export default function Admin() {
         <div className='lg:w-[calc(100%-400px)] md:w-[calc(100%-350px)] w-full flex justify-center pt-5'>
           <div className='md:w-[80%] w-[90%] h-96  flex flex-col items-center' key={counter}>
             <div className='max-w-[250px] w-[80%] flex justify-center items-center 
-            gap-1 p-2 rounded-xl text-white bg-color1 mb-5'
+            gap-1 p-2 rounded-xl text-white bg-color1 mb-5 cursor-pointer'
             onClick={()=> addLink()}>
               <AddIcon/> Link Ekle
             </div>

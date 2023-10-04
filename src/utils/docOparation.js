@@ -71,3 +71,25 @@ export const docAdd = async (username,setData) => {
   }
 
 }
+
+
+export const deleteLink = async (dataAll,setData,setCounter,index,username) => {
+  if (dataAll.list.length === index-1) { // son elemanı siliyorsa
+    const prevData = dataAll.list.slice(0, index)
+    const newData = { ...dataAll, list: prevData }
+    setData(newData)
+    docUpdate(username,newData)
+  } else if (index === 0) { // ilk elemanı siliyorsa
+    const prevData = dataAll.list.slice(1)
+    const newData = { ...dataAll, list: prevData }
+    setData(newData)
+    docUpdate(username,newData)
+  } else { // arada bir elemanı siliyorsa
+    const prevData = dataAll.list.slice(0, index).concat(dataAll.list.slice(index + 1)) 
+    const newData = { ...dataAll, list: prevData }
+    setData(newData)
+    docUpdate(username,newData)
+  }
+  setCounter(prev=>prev+1)
+  console.log("Link Silindi")
+}

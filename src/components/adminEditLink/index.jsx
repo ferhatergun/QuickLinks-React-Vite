@@ -9,6 +9,8 @@ import {Tooltip} from '@mui/material'
 import '~/styles/globals.css'
 import { RiSendPlaneFill } from "react-icons/ri";
 import { docUpdate } from '~/utils/docOparation';
+import { deleteLink } from '~/utils/docOparation';
+import { updateDoc } from 'firebase/firestore';
 
 export default function AdminEditLink({data,dataAll,index,setData,setCounter}) {
   const [edit,setEdit]=useState(false)
@@ -17,32 +19,9 @@ export default function AdminEditLink({data,dataAll,index,setData,setCounter}) {
   }
   const handleActive = (e) => {
     data.visible=e
-    update(dataAll)
-  }
-  const deleteLink = async () => {
-    if (dataAll.list.length === index-1) { // son elemanı siliyorsa
-      const prevData = dataAll.list.slice(0, index)
-      const newData = { ...dataAll, list: prevData }
-      setData(newData)
-      update(newData)
-    } else if (index === 0) { // ilk elemanı siliyorsa
-      const prevData = dataAll.list.slice(1)
-      const newData = { ...dataAll, list: prevData }
-      setData(newData)
-      update(newData)
-    } else { // arada bir elemanı siliyorsa
-      const prevData = dataAll.list.slice(0, index).concat(dataAll.list.slice(index + 1)) 
-      const newData = { ...dataAll, list: prevData }
-      setData(newData)
-      update(newData)
-    }
-    setCounter(prev=>prev+1)
-    console.log("Link Silindi")
+    docUpdate("fero1",dataAll)
   }
   
-  const update = (updateData) => {
-    docUpdate("fero1",updateData)
-  }
   return (
     <div>
       <div className='bg-gray-100 md:w-[500px] h-32 rounded-2xl mt-3 flex'>
@@ -67,7 +46,7 @@ export default function AdminEditLink({data,dataAll,index,setData,setCounter}) {
           />
           <Tooltip title='Linki Sil'>
             <div className='absolute bottom-2 left-2 text-color1 rounded-lg p-1 cursor-pointer hover:bg-gray-200'
-            onClick={()=>deleteLink()}>
+            onClick={()=>deleteLink(dataAll,setData,setCounter,index,"fero1")}>
               <DeleteIcon/>
             </div>
           </Tooltip>
@@ -76,7 +55,7 @@ export default function AdminEditLink({data,dataAll,index,setData,setCounter}) {
             <div className='text-color1 rounded-lg p-1 cursor-pointer flex justify-center' onClick={handleEdit}>
               {
                 edit ?
-                <RiSendPlaneFill fontSize={24} onClick={()=>update(dataAll)}/> :
+                <RiSendPlaneFill fontSize={24} onClick={()=>docUpdate("fero1",dataAll)}/> :
                 <EditIcon />
               }
             </div>                
