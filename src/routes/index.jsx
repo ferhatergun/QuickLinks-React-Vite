@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "~/pages/home";
-import About from "~/pages/about";
 import Detail from "~/pages/[id]";
 import Login from "~/pages/login";
 import Register from "~/pages/register";
@@ -9,17 +8,13 @@ import ForgotPass from "~/pages/forgotPass";
 import AdminLayout from "~/layout/AdminLayout";
 import Admin from "~/pages/admin";
 import Error500 from "~/components/error";
+import Ayarlar from "~/pages/admin/Ayarlar";
 
 
 export const routes = createBrowserRouter([
     {
         path: "/",
         element:<Home/>
-    },
-    {
-        path: "/about",
-        element:<About/>,
-        
     },
     {
         path: "/page/:id",
@@ -50,6 +45,10 @@ export const routes = createBrowserRouter([
             {
                 index:true,
                 element:<Admin />
+            },
+            {
+                path:"ayarlar",
+                element:<Ayarlar />
             }
         ]
     },

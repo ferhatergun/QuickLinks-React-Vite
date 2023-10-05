@@ -72,17 +72,17 @@ export default function AdminNavbar() {
     <div className='flex justify-between sm:px-10 mx-4 px-10 py-2 mt-2 items-center bg-slate-100 drop-shadow-sm shadow-sm rounded-2xl   '>
     <div className='flex md:gap-14 '>
     <div className="logo">
-      <img src="logo.png" alt="logo" className='w-14' />
+      <img src="/logo.png" alt="logo" className='w-14' />
     </div>
-      <div className='gap-2 items-center p-2 cursor-pointer hover:text-color1 sm:flex hidden'>
+      <Link to="/admin" className='gap-2 items-center p-2  hover:text-color1 sm:flex hidden'>
         <VisibilityIcon fontSize='medium' />
         <p className='text-base'>Görünüm</p>
-      </div>
-      <div className='gap-2 items-center p-2 cursor-pointer hover:text-color1 sm:flex hidden'>
+      </Link>
+      <Link to="ayarlar" className='gap-2 items-center p-2  hover:text-color1 sm:flex hidden'>
         <SettingsIcon fontSize='medium' />
         <p className='text-base'>Ayarlar</p>
-      </div>
-      <div className='gap-2 items-center p-2 cursor-pointer hover:text-color1 sm:flex hidden'>
+      </Link>
+      <div className='gap-2 items-center p-2  hover:text-color1 sm:flex hidden'>
         <ShareIcon fontSize='medium' />
         <p className='text-base'>Paylaş</p>
       </div>
@@ -92,7 +92,7 @@ export default function AdminNavbar() {
         <p className='text-base'>Çıkış Yap</p>
       </div>
       <div className="flex gap-5 items-center sm:hidden">
-        <div className='gap-2 items-center p-2 cursor-pointer hover:text-color1 flex' onClick={handleOpen}>
+        <div className='gap-2 items-center p-2  hover:text-color1 flex' onClick={handleOpen}>
           <ShareIcon fontSize='medium' />
           <p className='text-base'>Paylaş</p>
         </div>

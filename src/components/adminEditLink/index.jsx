@@ -29,7 +29,7 @@ export default function AdminEditLink({data,dataAll,index,setData,setCounter}) {
             <DragIndicatorIcon className='text-color1'/>
         </div>
       <div className='flex'>
-        <div className='w-[80%]  p-5 relative'>
+        <div className='w-[80%] p-5 relative'>
           <input 
           className={`w-full outline-none font-semibold rounded-xl px-1 ${edit ? 'bg-gray-200' : 'bg-transparent'}`} 
           placeholder='Link Başlığı'

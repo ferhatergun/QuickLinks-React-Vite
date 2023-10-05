@@ -46,7 +46,7 @@ export default function Home() {
         <div className='text-[50px]' onClick={()=>userCreate("deneme-1")} >kullanıcı oluştur</div>
         <div className='text-[50px]' onClick={()=>userCheck("fero")} >kullanıcı kontrol et</div>
         <div onClick={getUser}>Kullanıcıyı getir</div>
-        <div className={`${styles.background_2} w-full h-32`}></div>
+        {/* <div className={`${styles.background_2} w-full h-32`}></div> */}
         <button onClick={()=>auth.signOut()}>çıkış yap</button>
         <button onClick={()=>console.log(user)}>getir</button>
         </>:
