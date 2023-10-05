@@ -28,11 +28,11 @@ export default function Detail({id,bgcolor}) {
       }
       getData()
     },[])
-    
+
   if(loading)
     return (
     <div className={`min-h-[100vh] relative w-full pt-10 pb-5 flex flex-col 
-    items-center ${styles[`${bgcolor ? bgcolor : color}`]}`}>
+    items-center ${styles[`${bgcolor !== undefined ? bgcolor : color}`]}`}>
       <div className='text-center gap-2 flex flex-col'>
       <Avatar sx={{width:70,height:70}}>
         <p className='text-[40px]'>{params.id.substring(0,1).toUpperCase()}</p>

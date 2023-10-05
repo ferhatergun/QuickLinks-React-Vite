@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { styles } from '~/styles';
 
 export default function Ayarlar() {
-    const [color, setColor] = useState();
+    const [color, setColor] = useState(undefined);
     const [data, setData] = useState([]);
     const navigate = useNavigate();
     const abc = { id: "fero1" }
@@ -23,15 +23,17 @@ export default function Ayarlar() {
         docUpdate(abc.id,data)
     }
 
+
   return (
     <div className='flex flex-col items-center  m-auto md:w-[70%] w-[90%]  pt-5'>
         <p className='mb-2'>Arkaplan Rengini Değiştir</p>
-        <div className='flex gap-3 flex-wrap'>
+        <div className='flex gap-3 flex-wrap  justify-center'>
             {
                 styles.map((item,index)=>(
                     <div 
-                    className={`w-28 h-8 bg-gray-200 rounded-md ${item} cursor-pointer`} 
-                    onClick={()=>changeColor(index)} />
+                    className={`w-28 h-10 bg-gray-200  rounded-md ${item} cursor-pointer`} 
+                    onClick={()=>changeColor(index)}
+                    key={index} />
                 ))
             }
 
