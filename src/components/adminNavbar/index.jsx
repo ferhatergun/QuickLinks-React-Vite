@@ -28,19 +28,19 @@ export default function AdminNavbar() {
         {
             key: '1',
             label: (
-              <div className='flex gap-2 items-center p-2'>
+              <Link to="/admin" className='flex gap-2 items-center p-2'>
                 <VisibilityIcon fontSize='small' />
                 <p className='text-md'>Görünüm</p>
-              </div>
+              </Link>
             ),
           },
           {
             key: '2',
             label: (
-              <div className='flex gap-2 items-center p-2'>
+              <Link to="ayarlar" className='flex gap-2 items-center p-2'>
                 <SettingsIcon fontSize='small' />
                 <p className='text-md'>Ayarlar</p>
-              </div>
+              </Link>
             ),
           },
           {
