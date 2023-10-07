@@ -9,7 +9,6 @@ import AdminLayout from "~/layout/AdminLayout";
 import Admin from "~/pages/admin";
 import Error500 from "~/components/error";
 import Ayarlar from "~/pages/admin/Ayarlar";
-import Deneme from "~/components/Deneme";
 
 
 export const routes = createBrowserRouter([

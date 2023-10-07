@@ -1,14 +1,15 @@
 import React,{useEffect, useState} from 'react'
 import Detail from '../[id]'
 import { docGet, docUpdate } from '~/utils/docOparation';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { styles } from '~/styles';
 
 export default function Ayarlar() {
     const [color, setColor] = useState(undefined);
     const [data, setData] = useState([]);
+    const admin = useOutletContext()
     const navigate = useNavigate();
-    const abc = { id: "fero1" }
+    const abc = { id: admin.displayName }
     useEffect(()=>{
         const getData = async () => {
             const data = await docGet(abc.id,navigate)

@@ -11,15 +11,17 @@ import { RiSendPlaneFill } from "react-icons/ri";
 import { docUpdate } from '~/utils/docOparation';
 import { deleteLink } from '~/utils/docOparation';
 import { updateDoc } from 'firebase/firestore';
+import { useOutletContext } from 'react-router-dom';
 
 export default function AdminEditLink({data,dataAll,index,setData,setCounter}) {
   const [edit,setEdit]=useState(false)
+  const admin=useOutletContext()
   const handleEdit = () =>{
     setEdit(!edit)
   }
   const handleActive = (e) => {
     data.visible=e
-    docUpdate("fero1",dataAll)
+    docUpdate(admin.displayName,dataAll)
   }
   
   return (
@@ -46,7 +48,7 @@ export default function AdminEditLink({data,dataAll,index,setData,setCounter}) {
           />
           <Tooltip title='Linki Sil'>
             <div className='absolute bottom-2 left-2 text-color1 rounded-lg p-1 cursor-pointer hover:bg-gray-200'
-            onClick={()=>deleteLink(dataAll,setData,setCounter,index,"fero1")}>
+            onClick={()=>deleteLink(dataAll,setData,setCounter,index,admin.displayName)}>
               <DeleteIcon/>
             </div>
           </Tooltip>
@@ -55,7 +57,7 @@ export default function AdminEditLink({data,dataAll,index,setData,setCounter}) {
             <div className='text-color1 rounded-lg p-1 cursor-pointer flex justify-center' onClick={handleEdit}>
               {
                 edit ?
-                <RiSendPlaneFill fontSize={24} onClick={()=>docUpdate("fero1",dataAll)}/> :
+                <RiSendPlaneFill fontSize={24} onClick={()=>docUpdate(admin.displayName,dataAll)}/> :
                 <EditIcon />
               }
             </div>                

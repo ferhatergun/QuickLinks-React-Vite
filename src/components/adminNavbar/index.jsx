@@ -18,12 +18,12 @@ import { QRCode } from 'antd';
 
 
 
-export default function AdminNavbar() {
+
+export default function AdminNavbar({admin}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [qrUrl,setQrUlr]=useState("www.google.com")
-
     const items =[
         {
             key: '1',
@@ -46,7 +46,7 @@ export default function AdminNavbar() {
           {
             key: '3',
             label: (
-              <div className='flex gap-2 items-center p-2'>
+              <div className='flex gap-2 items-center p-2' onClick={userLogout}>
                 <LogoutIcon fontSize='small' />
                 <p className='text-md'>Çıkış Yap</p>
               </div>
@@ -54,20 +54,11 @@ export default function AdminNavbar() {
           },
     ]
 
-    const downloadQRCode = () => {
-      const canvas = document.getElementById('myqrcode')?.querySelector('canvas');
-      if (canvas) {
-        const url = canvas.toDataURL();
-        const a = document.createElement('a');
-        console.log(url)
-        a.download = 'QRCode.png';
-        a.href = url;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }
-    };
+    const copyUrl=()=>{
+      navigator.clipboard.writeText(`https://quick-links-react-vite.vercel.app/page/${admin.displayName}`)
+      toast.success("URL Kopyalandı")
 
+    }
   return (
     <div className='flex justify-between sm:px-10 mx-4 px-10 py-2 mt-2 items-center bg-slate-100 drop-shadow-sm shadow-sm rounded-2xl   '>
     <div className='flex md:gap-14 '>
@@ -82,12 +73,12 @@ export default function AdminNavbar() {
         <SettingsIcon fontSize='medium' />
         <p className='text-base'>Ayarlar</p>
       </Link>
-      <div className='gap-2 items-center p-2  hover:text-color1 sm:flex hidden'>
+      <div className='gap-2 items-center p-2  hover:text-color1 sm:flex hidden' onClick={handleOpen}>
         <ShareIcon fontSize='medium' />
         <p className='text-base'>Paylaş</p>
       </div>
       </div>
-      <div className='gap-2 items-center p-2 cursor-pointer hover:text-color1 sm:flex hidden'>
+      <div className='gap-2 items-center p-2 cursor-pointer hover:text-color1 sm:flex hidden' onClick={userLogout}>
         <LogoutIcon fontSize='medium' />
         <p className='text-base'>Çıkış Yap</p>
       </div>
@@ -107,22 +98,22 @@ export default function AdminNavbar() {
   aria-describedby="modal-modal-description"
 >
   <Box sx={style}>
+    <div className='flex flex-col gap-3'>
     <div className='flex justify-center gap-3'>
-      <p>quicklinks/testuser</p>
-      <ContentCopyIcon className='cursor-pointer' onClick={()=>alert("Tıklandı")} />
+      <p>URL Kopyala</p>
+      <ContentCopyIcon className='cursor-pointer' 
+      onClick={()=>copyUrl()} />
     </div>
     <div id="myqrcode">
-      <QRCode 
-      bgColor='white'
+      <QRCode
+      className='m-auto'
       errorLevel="H"
-      value="https://quick-links-react-vite-ferhatergun.vercel.app/page/deneme-1"
-      icon="logo.png"
+      value={`https://quick-links-react-vite.vercel.app/page/${admin.displayName}`}
+      icon="/logo.png"
       />
-    <button onClick={downloadQRCode}>Download QR</button>
-
     </div>
-    
-    <WhatsappShareButton url={qrUrl}>paylaş</WhatsappShareButton>
+    <WhatsappShareButton url={`https://quick-links-react-vite.vercel.app/page/${admin.displayName}`}>Paylaş</WhatsappShareButton>
+    </div>
   </Box>
 </Modal>
   </div>

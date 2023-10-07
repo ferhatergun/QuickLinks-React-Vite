@@ -16,7 +16,7 @@ export default function Admin() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0)
 
   const getData = async () => {
     const data = await docGet(admin.displayName, navigate);
@@ -30,10 +30,10 @@ export default function Admin() {
 
 
   const addLink = () => {
-    docAdd("fero1", setData);
+    docAdd(admin.displayName, setData)
   };
 
-  const abc = { id: "fero1" };
+  const abc = { id: admin.displayName };
 
   const handleOnDragEnd = async (result) => {
     if (!result.destination) return; // aynı yerine ise bişi yapmadı
@@ -49,7 +49,8 @@ export default function Admin() {
   }
   
    useEffect(()=>{
-    docUpdate("fero1",data)
+    if(loading)
+    docUpdate(admin.displayName,data)
   },[data])  
 
   return (

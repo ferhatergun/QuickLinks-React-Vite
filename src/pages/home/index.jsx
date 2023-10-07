@@ -20,7 +20,6 @@ export default function Home() {
   
       if (user.exists()) {
         const documentData = user.data();
-        console.log('Belge Verisi:', documentData);
         setColor(documentData.bgColor)
       } else {
         console.log('Belge bulunamadı.');

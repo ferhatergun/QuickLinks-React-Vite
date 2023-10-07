@@ -21,7 +21,6 @@ export default function Detail({id,bgcolor}) {
         const data = await docGet(params.id,navigate)
         if(data){
             setColor(data.bgColor)
-            console.log(color)
             setLoading(true)
             setData(data)
         }

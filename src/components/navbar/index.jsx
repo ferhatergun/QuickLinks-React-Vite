@@ -4,7 +4,6 @@ import { Tooltip } from '@mui/material';
 import { userLogout } from '~/utils/userOperation';
 
 export default function Navbar({ user }) {
-  console.log(user);
   return (
     <div className='flex justify-between sm:px-10 px-3 py-5 items-center'>
       <div className="logo">

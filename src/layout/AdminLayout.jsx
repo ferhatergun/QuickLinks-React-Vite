@@ -13,7 +13,7 @@ export default function AdminLayout() {
     if(admin){
       return(
         <div>
-            <AdminNavbar />
+            <AdminNavbar admin={admin} />
             <Outlet context={admin} />
         </div>
 
