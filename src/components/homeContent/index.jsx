@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Content() {
     const [name, setName] = useState('')
   return (
-    <div className='min-h-[50vh] bg-gray-200 mt-20 rounded-[20px] flex flex-wrap-reverse justify-center overflow-hidden'>
+    <div className='min-h-[50vh] bg-gray-100 mt-20 rounded-[20px] flex flex-wrap-reverse justify-center overflow-hidden'>
         <div className="md:w-[50%] w-full md:p-10 p-5">
             <TypeAnimation
             sequence={[
@@ -44,12 +44,12 @@ export default function Content() {
         </div>
         <div className="md:w-[50%] max-h-[50vh]">
             <motion.img
-            src="fotos-1.png"
+            src="/fotos-1.png"
             alt=""
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{duration:0.5,ease:'linear',delay:0.6}}
-            className='h-full m-auto mix-blend-multiply'
+            transition={{duration:0.5,ease:'easeIn',delay:0.3}}
+            className='h-full m-auto '
             />
         </div>
     </div>

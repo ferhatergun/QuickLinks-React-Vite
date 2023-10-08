@@ -55,7 +55,7 @@ export default function AdminNavbar({admin}) {
     ]
 
     const copyUrl=()=>{
-      navigator.clipboard.writeText(`https://quick-links-react-vite.vercel.app/page/${admin.displayName}`)
+      navigator.clipboard.writeText(`${window.location.origin}/page/${admin.displayName}`)
       toast.success("URL Kopyalandı")
 
     }
@@ -108,11 +108,11 @@ export default function AdminNavbar({admin}) {
       <QRCode
       className='m-auto'
       errorLevel="H"
-      value={`https://quick-links-react-vite.vercel.app/page/${admin.displayName}`}
+      value={`${window.location.origin}/page/${admin.displayName}`}
       icon="/logo.png"
       />
     </div>
-    <WhatsappShareButton url={`https://quick-links-react-vite.vercel.app/page/${admin.displayName}`}>Paylaş</WhatsappShareButton>
+    <WhatsappShareButton url={`${window.location.origin}/page/${admin.displayName}`}>Paylaş</WhatsappShareButton>
     </div>
   </Box>
 </Modal>

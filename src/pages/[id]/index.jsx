@@ -5,35 +5,53 @@ import { styles } from '~/styles';
 import Loader from '~/components/loader';
 import { docGet } from '~/utils/docOparation';
 import { Avatar } from '@mui/material';
+import { motion } from 'framer-motion';
+import { getDownloadURL, ref } from 'firebase/storage';
+import { storage } from '~/firebase/firebase';
+
 
 
 export default function Detail({id,bgcolor}) {
     const params = id ? id : useParams()
-    const [color, setColor] = useState("") // color # ile tutulsun
+    const [color, setColor] = useState("") 
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
-    const [data, setData] = useState({}) //
+    const [data, setData] = useState({}) 
+    const [photo, setPhoto] = useState('') 
 
 
+    const getData = async () => {
+      const data = await docGet(params.id,navigate)
+      if(data){
+          setColor(data.bgColor)
+          setLoading(true)
+          setData(data)
+      }
+    }
+    const getPhotos = async () => {
+      try{
+        const imageRef = ref(storage, `profilPhotos/${params.id}`)
+        const url = await getDownloadURL(imageRef)
+        setPhoto(url)
+      }catch(e){
+        console.log("fotoğraf yüklerken hata oluştu",e)
+      }
+      
+
+    }
 
     useEffect(()=>{
-      const getData = async () => {
-        const data = await docGet(params.id,navigate)
-        if(data){
-            setColor(data.bgColor)
-            setLoading(true)
-            setData(data)
-        }
-      }
       getData()
+      getPhotos()
     },[])
+
 
   if(loading)
     return (
     <div className={`min-h-[100vh] relative w-full pt-10 pb-5 flex flex-col 
     items-center ${styles[`${bgcolor !== undefined ? bgcolor : color}`]}`}>
-      <div className='text-center gap-2 flex flex-col'>
-      <Avatar sx={{width:70,height:70}}>
+      <div className='text-center gap-2 flex flex-col items-center'>
+      <Avatar sx={{width:70,height:70}} src={photo}>
         <p className='text-[40px]'>{params.id.substring(0,1).toUpperCase()}</p>
       </Avatar>
       <p className='text-lg font-semibold'>@{params.id}</p>
@@ -44,10 +62,12 @@ export default function Detail({id,bgcolor}) {
           data.list.length > 0 ?
           data.list.map((item,index)=>(
               item.visible === true &&
-              <Link to={item.link} target='_blank' key={index} className='w-full h-12 flex 
-              items-center justify-center bg-gray-200  drop-shadow-xl rounded-lg hover:scale-[103%] duration-200 ease-in'>
+              <motion.a  whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }} 
+              href={item.link} target='_blank' key={index} className='w-full h-12 flex 
+              items-center justify-center bg-gray-200  drop-shadow-xl rounded-lg '>
                 {item.label}
-              </Link>
+              </motion.a>
 
           )) :
           <p className='text-lg'>Link Bulunamadı</p>

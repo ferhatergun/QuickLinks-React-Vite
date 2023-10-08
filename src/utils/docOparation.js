@@ -8,6 +8,7 @@ export const CreateDoc = async (username) => {
      // username isimli documenti yakalıyoruz
  
      setDoc(userDocRef, { // yakaladığımız referansın içini dolduruyoruz
+      bgColor:0,
        list:
        [
          {

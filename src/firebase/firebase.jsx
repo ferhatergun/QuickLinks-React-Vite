@@ -4,6 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { firebaseApiKey, firebaseAuthDomain, firebaseProjectId, 
     firebaseStorageBucket, firebaseMessagingSenderId, firebaseAppId, 
     firebaseMeasurementId } from '../../env.js'
+import { getStorage } from 'firebase/storage'
 
 
 const firebaseConfig = {
@@ -20,3 +21,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const storage = getStorage(app);
