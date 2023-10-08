@@ -73,7 +73,7 @@ export default function AdminNavbar({admin}) {
         <SettingsIcon fontSize='medium' />
         <p className='text-base'>Ayarlar</p>
       </Link>
-      <div className='gap-2 items-center p-2  hover:text-color1 sm:flex hidden' onClick={handleOpen}>
+      <div className='gap-2 items-center p-2  hover:text-color1 sm:flex hidden cursor-pointer' onClick={handleOpen}>
         <ShareIcon fontSize='medium' />
         <p className='text-base'>Paylaş</p>
       </div>
@@ -83,7 +83,7 @@ export default function AdminNavbar({admin}) {
         <p className='text-base'>Çıkış Yap</p>
       </div>
       <div className="flex gap-5 items-center sm:hidden">
-        <div className='gap-2 items-center p-2  hover:text-color1 flex' onClick={handleOpen}>
+        <div className='gap-2 items-center p-2  hover:text-color1 flex cursor-pointer' onClick={handleOpen}>
           <ShareIcon fontSize='medium' />
           <p className='text-base'>Paylaş</p>
         </div>
@@ -134,4 +134,5 @@ const style = {
   dispay: 'flex',
   justifyContent: 'center',
   textAlign: 'center',
+  borderRadius: '1rem',
 };

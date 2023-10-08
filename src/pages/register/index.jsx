@@ -7,7 +7,6 @@ import { userCreate } from '~/utils/userOperation';
 
 export default function Register() {
     const location = useLocation().state
-    console.log(location)
 
    const inputstyles = {
         "& .MuiInputLabel-root.Mui-focused ": {
