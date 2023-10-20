@@ -62,12 +62,12 @@ export default function AdminNavbar({admin}) {
   return (
     <div className='flex justify-between sm:px-10 mx-4 px-10 py-2 mt-2 items-center bg-slate-100 drop-shadow-sm shadow-sm rounded-2xl   '>
     <div className='flex md:gap-14 '>
-    <div className="logo">
+    <Link className="logo">
       <img src="/logo.png" alt="logo" className='w-14' />
-    </div>
+    </Link>
       <Link to="/admin" className='gap-2 items-center p-2  hover:text-color1 sm:flex hidden'>
         <VisibilityIcon fontSize='medium' />
-        <p className='text-base'>Görünüm</p>
+        <p className='text-base'>Linklerim</p>
       </Link>
       <Link to="ayarlar" className='gap-2 items-center p-2  hover:text-color1 sm:flex hidden'>
         <SettingsIcon fontSize='medium' />

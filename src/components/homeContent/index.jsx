@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 export default function Content() {
     const [name, setName] = useState('')
   return (
-    <div className='min-h-[50vh] bg-gray-100 mt-20 rounded-[20px] flex flex-wrap-reverse justify-center overflow-hidden'>
-        <div className="md:w-[50%] w-full md:p-10 p-5">
+    <>
+    <div className='min-h-[60vh]  bg-gray-100 mt-20 rounded-[20px] flex flex-wrap-reverse  justify-center overflow-hidden'>
+        <div className="md:w-[50%] w-full md:p-10 p-5  self-center md:block flex flex-col items-center ">
             <TypeAnimation
             sequence={[
                 'Tek Link Sonsuz Bağlantı',
@@ -42,16 +43,42 @@ export default function Content() {
                 Lets Start</Link>
             </div>
         </div>
-        <div className="md:w-[50%] max-h-[50vh]">
-            <motion.img
+        <div className="md:w-[50%] max-h-[60vh]">
+           <img
             src="/fotos-1.png"
             alt=""
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{duration:0.5,ease:'easeIn',delay:0.3}}
-            className='h-full m-auto '
-            />
+            className='h-full m-auto mix-blend-multiply'
+            /> 
         </div>
     </div>
+
+    <div className='min-h-[60vh] bg-gray-100 mt-20 rounded-[20px] flex flex-wrap-reverse justify-center overflow-hidden'>
+        <div className="md:w-[50%] max-h-[60vh] md:block hidden">
+            <video className='h-full mix-blend-multiply m-auto' autoPlay loop muted src='/video.mp4' />
+        </div>
+        <div className="md:w-[50%] w-full md:p-10 p-5 self-center md:block flex flex-col items-center">
+            <p className='lg:text-3xl text-2xl text-[#bb274a]'> 
+                Özgürce Arkaplanı Değiştir
+            </p>
+            <p className='lg:text-lg  text-base mt-[3vh]'>
+            Sayfanızın Estetiğini Kendi Zevkinize Göre Şekillendirin! <br/>
+            Özgürce Arka Planını Değiştirin ve Kendinizi İfade Edin.<br/> Sayfanız, Sizin Tarzınız!
+            </p>
+            <Link className='h-12 w-40 mr-2 bg-[#bb274a] rounded-2xl mt-5 
+            flex justify-center items-center text-white shadow-gray-300 shadow-sm drop-shadow-xl'
+            to="/register" state={{username:name}}>
+            Hemen Başla</Link>
+        </div>
+        <div className="md:w-[50%] md:max-h-[60vh] max-h-[40vh] md:hidden block">
+            <video className='h-full mix-blend-multiply m-auto' autoPlay loop muted src='/video.mp4' />
+        </div>
+     
+    </div>
+    </>
+
+    
   )
 }
