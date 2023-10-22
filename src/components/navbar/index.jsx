@@ -20,7 +20,7 @@ export default function Navbar({ user }) {
             </> :
             <>
               <Link to="/admin" className="bg-color1 px-5 py-3 rounded-[20px] text-white">
-                Admin
+                Admin Paneli
               </Link>
               <Tooltip title='Çıkış Yap' placement='bottom'>
                 <div className=' drop-shadow-md shadow-md shadow-slate-300 rounded-md p-2 cursor-pointer'

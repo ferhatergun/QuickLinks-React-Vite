@@ -8,6 +8,7 @@ import HomeContent from '~/components/homeContent';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import { auth } from '~/firebase/firebase';
 import Loader from '~/components/loader';
+import Footer from '~/components/footer';
 
 
 export default function Home() {
@@ -37,12 +38,12 @@ export default function Home() {
   },[])
 
   return (
-    <div style={{backgroundColor:color}} className='lg:w-[80vw] m-auto'>
+    <div style={{backgroundColor:color}} className='lg:w-[80vw] w-[90vw] m-auto'>
       { (!isLoading && loading) ?
       <>
         <Navbar user={user} />
-        <HomeContent />
-        <HomeContent />
+        <HomeContent key={0}/>
+        <Footer/>
         </>:
         <Loader />
       }
