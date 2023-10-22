@@ -8,7 +8,7 @@ import HomeContent from '~/components/homeContent';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import { auth } from '~/firebase/firebase';
 import Loader from '~/components/loader';
-import Footer from '~/components/footer';
+import Footer from '~/components/Footer/Footer';
 
 
 export default function Home() {
